@@ -18,40 +18,22 @@ cd PruebaBackendJava
 
 ---
 
-### Levantar las bases de datos
-Las bases de datos PostgreSQL para ambos microservicios se levantan mediante Docker Compose:
+### Levantar entorno
+La solución está completamente containerizada usando Docker y Docker Compose.
+Cada microservicio cuenta con su propio Dockerfile y su propia base de datos PostgreSQL
+
+Para levantar el entorno:
 
 ```bash
 docker compose up -d
 ```
 
-Esto crea dos bases de datos independientes:
-- **products_db** → ProductsService
-- **inventory_db** → InventoryService
+Esto levanta los siguientes contenedores:
+- **products_db**  BAse de datos PostgreSQL de ProductsService
+- **inventory_db**  Base de datos de InventoryService
+- **products-service** Microservicio de productos
+- **inventory-service** Microservicio de inventario y compras
 
----
-
-### Ejecutar los microservicios
-
-Cada microservicio se ejecuta de manera independiente.
-
-#### ProductsService
-```bash
-cd ProductsService
-./mvnw spring-boot:run
-```
-Puerto: **8081**
-
----
-
-#### InventoryService
-```bash
-cd InventoryService
-./mvnw spring-boot:run
-```
-Puerto: **8082**
-
----
 
 ### Swagger / OpenAPI
 

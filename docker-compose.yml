@@ -1,8 +1,8 @@
 services:
 
-  postgres-products:
+  products-db:
     image: postgres:15
-    container_name: postgres-products
+    container_name: products-db
     environment:
       POSTGRES_DB: products_db
       POSTGRES_USER: products
@@ -10,12 +10,29 @@ services:
     ports:
       - "5433:5432"
 
-  postgres-inventory:
+  inventory-db:
     image: postgres:15
-    container_name: postgres-inventory
+    container_name: inventory-db
     environment:
       POSTGRES_DB: inventory_db
       POSTGRES_USER: inventory
       POSTGRES_PASSWORD: inventory
     ports:
       - "5434:5432"
+
+  products-service:
+    build: ./ProductsService
+    container_name: products-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - products-db
+
+  inventory-service:
+    build: ./InventoryService
+    container_name: inventory-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - inventory-db
+      - products-service
