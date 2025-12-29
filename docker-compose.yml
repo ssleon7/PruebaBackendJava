@@ -1,0 +1,21 @@
+services:
+
+  postgres-products:
+    image: postgres:15
+    container_name: postgres-products
+    environment:
+      POSTGRES_DB: products_db
+      POSTGRES_USER: products
+      POSTGRES_PASSWORD: products
+    ports:
+      - "5433:5432"
+
+  postgres-inventory:
+    image: postgres:15
+    container_name: postgres-inventory
+    environment:
+      POSTGRES_DB: inventory_db
+      POSTGRES_USER: inventory
+      POSTGRES_PASSWORD: inventory
+    ports:
+      - "5434:5432"
